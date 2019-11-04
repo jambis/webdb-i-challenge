@@ -7,14 +7,21 @@ module.exports = {
   remove
 };
 
-function get(id) {
-  let query = db("accounts");
-
+function get(query, id) {
   if (id) {
-    return query.where("id", id).first();
+    return db("accounts")
+      .where("id", id)
+      .first();
   }
 
-  return query;
+  let { sortby = "id", sortdir = "asc" } = query;
+  let finalQuery = db("accounts").orderBy(sortby, sortdir);
+
+  if (query.limit) {
+    return finalQuery.limit(query.limit);
+  }
+
+  return finalQuery;
 }
 
 function insert(budget) {

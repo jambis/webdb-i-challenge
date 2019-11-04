@@ -3,7 +3,8 @@ const db = require("../data/helpers/budgetModel");
 
 router.get("/", async (req, res) => {
   try {
-    const budgets = await db.get();
+    console.log(req.query);
+    const budgets = await db.get(req.query);
 
     res.status(200).json(budgets);
   } catch {
@@ -53,7 +54,7 @@ router.delete("/:id", validateID, async (req, res) => {
 
 async function validateID(req, res, next) {
   try {
-    const budget = await db.get(req.params.id);
+    const budget = await db.get(null, req.params.id);
     req.budget = budget;
     budget
       ? next()
