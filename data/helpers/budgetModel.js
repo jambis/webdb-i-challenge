@@ -14,12 +14,10 @@ function get(query, id) {
       .first();
   }
 
-  let { sortby = "id", sortdir = "asc" } = query;
-  let finalQuery = db("accounts").orderBy(sortby, sortdir);
-
-  if (query.limit) {
-    return finalQuery.limit(query.limit);
-  }
+  let { limit = "ALL", sortby = "id", sortdir = "asc" } = query;
+  let finalQuery = db("accounts")
+    .orderBy(sortby, sortdir)
+    .limit(limit);
 
   return finalQuery;
 }
