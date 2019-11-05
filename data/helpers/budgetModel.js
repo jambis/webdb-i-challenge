@@ -15,11 +15,10 @@ function get(query, id) {
   }
 
   let { limit = "ALL", sortby = "id", sortdir = "asc" } = query;
-  let finalQuery = db("accounts")
+
+  return db("accounts")
     .orderBy(sortby, sortdir)
     .limit(limit);
-
-  return finalQuery;
 }
 
 function insert(budget) {
