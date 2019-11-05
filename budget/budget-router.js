@@ -3,7 +3,6 @@ const db = require("../data/helpers/budgetModel");
 
 router.get("/", async (req, res) => {
   try {
-    console.log(req.query);
     const budgets = await db.get(req.query);
 
     res.status(200).json(budgets);
